@@ -176,7 +176,7 @@ delayScreensaver()
     if [ "$screensaver" == "xscreensaver" ]; then
         xscreensaver-command -deactivate > /dev/null
     elif [ "$screensaver" == "gnome-screensaver" ]; then
-        gnome-screensaver-command --deactivate > /dev/null
+        dbus-send --session --type=method_call --dest=org.gnome.ScreenSaver --reply-timeout=20000 /org/gnome/ScreenSaver org.gnome.ScreenSaver.SimulateUserActivity > /dev/null
     elif [ "$screensaver" == "kscreensaver" ]; then
         qdbus org.freedesktop.ScreenSaver /ScreenSaver SimulateUserActivity > /dev/null
     fi
